@@ -221,10 +221,10 @@ input事件的一个特点，就是会连续触发，比如用户每次按下一
 
 2. select事件
 
-select事件当在<input>、<textarea>中选中文本时触发。
+select事件当在`<input>`、<textarea>中选中文本时触发。
 3. Change事件
 
-Change事件当<input>、<select>、<textarea>的值发生变化时触发。它与input事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，而且input事件必然会引发change事件。具体来说，分成以下几种情况。
+Change事件当`<input>`、<select>、<textarea>的值发生变化时触发。它与input事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，而且input事件必然会引发change事件。具体来说，分成以下几种情况。
 - 激活单选框（radio）或复选框（checkbox）时触发。
 - 用户提交时触发。比如，从下列列表（select）完成选择，在日期或文件输入框完成选择。
 - 当文本框或textarea元素的值发生改变，并且丧失焦点时触发。
