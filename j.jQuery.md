@@ -1,4 +1,22 @@
 ### jQuery.fn===jQuery.prototype
+### $(document).ready(handler) === $(handler). 
+example:
+```
+$(function(){
+    console.log('ready');
+});
+```
+
+### .on( events [,selector ] [,data ], handler(eventObject) ) on事件 多利用selector 进行事件委托
+
+### 由于class是javaScript的保留字，所以只能放在引号中。
+```
+$( '<li>', {
+  html: 'test',
+  'class': 'greet'
+});
+```
+
 # jQuery 能做什么？
 jQuery是一个兼容多浏览器的JavaScript库，核心理念是write less，do more，它的语法设计可以使开发更加便捷，例如操作文档对象、选择DOM元素、制作动画效果、事件处理、使用Ajax等。除此之外，jQuery还提供API让开发者编写插件。
 - 取得文档中的元素$('div').find('.className');
