@@ -9,6 +9,10 @@ $(function(){
 
 ### .on( events [,selector ] [,data ], handler(eventObject) ) on事件 多利用selector 进行事件委托
 
+### 如果append prepend方法的参数不是新生成的元素，而是当前页面已存在的元素，则会产生移动元素的效果。
+
+### jQuery提供一些方法，可以很容易地显示网页动画效果。但是，总体上来说，它们不如CSS动画强大和节省资源，所以应该优先考虑使用CSS动画。
+
 ### 由于class是javaScript的保留字，所以只能放在引号中。
 ```
 $( '<li>', {
@@ -16,6 +20,34 @@ $( '<li>', {
   'class': 'greet'
 });
 ```
+# 测试有没有选中的标准方法。
+不管有没有选中，jQuery构造函数总是返回一个实例对象，而对象的布尔值永远是true。使用length属性才是判断有没有选中的正确方法。
+如果网页没有元素，则返回对象的length属性等于0。
+```
+//正确方法
+if ( $('li').length) {
+}
+```
+```
+//错误
+if ($('div.foo')) { ... }
+```
+# attr方法和prop方法区别
+网页元素的属性，比如a元素的href属性、img元素的src属性。这要使用attr方法读写。  
+DOM元素的属性，比如tagName、nodeName、nodeType等等。这要使用prop方法读写。  
+attr方法和prop方法针对的是不同的属性。在英语中，attr是attribute的缩写，prop是property的缩写，中文很难表达出这种差异。有时，attr方法和prop方法对同一个属性会读到不一样的值。比如，网页上有一个单选框。
+```
+<input type="checkbox" checked="checked" />
+```
+对于checked属性，attr方法读到的是checked，prop方法读到的是true。
+
+# clone方法
+
+clone方法克隆当前元素。
+
+对于那些有id属性的节点，clone方法会连id属性一起克隆。所以，要把克隆的节点插入文档的时候，务必要修改或移除id属性。
+
+
 
 # jQuery 能做什么？
 jQuery是一个兼容多浏览器的JavaScript库，核心理念是write less，do more，它的语法设计可以使开发更加便捷，例如操作文档对象、选择DOM元素、制作动画效果、事件处理、使用Ajax等。除此之外，jQuery还提供API让开发者编写插件。
