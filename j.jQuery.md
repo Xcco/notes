@@ -47,7 +47,31 @@ clone方法克隆当前元素。
 
 对于那些有id属性的节点，clone方法会连id属性一起克隆。所以，要把克隆的节点插入文档的时候，务必要修改或移除id属性。
 
+# 事件的名称空间
 
+同一个事件有时绑定了多个回调函数，这时如果想移除其中的一个回调函数，可以采用“名称空间”的方式，即为每一个回调函数指定一个二级事件名，然后再用off方法移除这个二级事件的回调函数。
+```
+$('li').on('click.logging', function (){
+  console.log('click.logging callback removed');
+});
+
+$('li').off('click.logging');
+```
+# 一次性事件
+one方法指定一次性的回调函数，即这个函数只能运行一次。这对提交表单很有用。
+```
+$("#button").one( "click", function() { return false; } );
+```
+one方法本质上是回调函数运行一次，即解除对事件的监听。
+```
+document.getElementById("#button").addEventListener("click", handler);
+
+function handler(e) {
+    e.target.removeEventListener(e.type, arguments.callee);
+	return false;
+}
+```
+上面的代码在点击一次以后，取消了对click事件的监听。如果有特殊需要，可以设定点击2次或3次之后取消监听，这都是可以的。
 
 # jQuery 能做什么？
 jQuery是一个兼容多浏览器的JavaScript库，核心理念是write less，do more，它的语法设计可以使开发更加便捷，例如操作文档对象、选择DOM元素、制作动画效果、事件处理、使用Ajax等。除此之外，jQuery还提供API让开发者编写插件。
