@@ -1,6 +1,17 @@
 # 特殊写法
 ### innerHTML(HTML XML 整体全部大写，不使用驼峰）
 ### onreadystatechange
+
+# jQuery
+以下事件不用驼峰
+- keydown
+- keypress
+- keyup
+- mouseover
+- mouseout
+- mouseenter
+- mouseleave
+
 # 简写
 margin:1px 2px 3px 4px;
 
