@@ -9,6 +9,8 @@ $(function(){
 
 ### .on( events [,selector ] [,data ], handler(eventObject) ) on事件 多利用selector 进行事件委托
 
+### jQuery animate color类的都需要引入UI库
+
 ### 如果append prepend方法的参数不是新生成的元素，而是当前页面已存在的元素，则会产生移动元素的效果。
 
 ### jQuery提供一些方法，可以很容易地显示网页动画效果。但是，总体上来说，它们不如CSS动画强大和节省资源，所以应该优先考虑使用CSS动画。
