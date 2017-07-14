@@ -100,7 +100,14 @@ $ct.find($('.item'))
 $ct.children()
 ```
 对于$node，向上找到 class 为'.ct'的父亲，在从该父亲找到'.panel'的孩子
-
+```
+$node.parents($('.ct')).find($('.panel'))
+```
 获取选择元素的数量
+```
+$node.length;
+```
 获取当前元素在兄弟中的排行
-
+```
+$node.index()
+```
