@@ -3,7 +3,7 @@
 ### onreadystatechange
 
 # jQuery
-以下事件不用驼峰
+### 以下事件不用驼峰
 - keydown
 - keypress
 - keyup
@@ -11,6 +11,9 @@
 - mouseout
 - mouseenter
 - mouseleave
+
+### 不是function 不用括号 .offset().top  .offset().left
+
 
 # 简写
 margin:1px 2px 3px 4px;
