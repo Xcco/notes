@@ -1,0 +1,132 @@
+- (?:xxx)?:在前 xxx仍属于正则表达式 但不列入分组
+- exp1(?=exp2)	匹配后面是exp2的exp1 
+- exp1(?!exp2)  匹配后面不是exp2的exp1
+### 在ES5规范中正则表达式和字符串常量不一样，每次声明都会重新创建变量
+### 原则上正则的一个字符对应一个字符，我们可以用[]把它们括起来，让[]这个整体对应一个字符
+### 正则表达式字面量不引入属性值 必须先写成正则格式再引入
+元字符：在正则表达式中具有特殊意义的专用字符，可以用来规定其前导字符 ( [ { \ ^ $ | ) ? * + .  
+(没有'}' ']')  
+[]内除"\"外均不用转义  "-"需要放在开头
+/[\u4e00-\u9fa5]/用于匹配单个汉字。  
+贪婪两次从后往前 惰性量词从前往后
+取反[^  ]
+*#-都不能引发单词边界\b  
+字符	含义  
+\t	水平制表符  
+\r	回车符  
+\n	换行符  
+\f	换页符  
+\cX	与X对应的控制字符（Ctrl+X）  
+\v	垂直制表符  
+\0	空字符    
+.	[^\r\n]	除了回车符和换行符之外的所有字符  
+\d	[0-9]	数字字符  
+\D	[^0-9]	非数字字符  
+\s	[\t\n\x0B\f\r]	空白符  
+\S	[^\t\n\x0B\f\r]	非空白符  
+\w	[a-zA-Z_0-9]	单词字符，字母、数字下划线  
+\W	[^a-zA-Z_0-9]	非单词字符  
+^	以xxx开头  
+$	以xxx结尾  
+\b	单词边界  
+\B	非单词边界  
+?	出现零次或一次（最多出现一次）  
++	出现一次或多次（至少出现一次）  
+*	出现零次或多次（任意次）  
+{n}	出现n次  
+{n,m}	出现n到m次  
+{n,}	至少出现n次  
+
+字符	匹配  
+i	执行不区分大小写的匹配  
+g	执行一个全局匹配，简而言之，即找到所有的匹配，而不是在找到第一个之后就停止  
+m	多行匹配模式，^匹配一行的开头和字符串的开头，$匹配行的结束和字符串的结束  
+
+# \d，\w,\s,[a-zA-Z0-9],\b,.,*,+,?,x{3},^,$分别是什么?
+\d：表示匹配0-9之间的任一数字，相当于[0-9]
+
+\w：表示匹配任意的字母、数字和下划线，相当于[A-Za-z0-9_]
+
+\s：表示匹配空格（包括制表符、空格符、断行符等），相等于[\t\r\n\v\f]
+
+[a-zA-Z0-9]:表示匹配任意的字母、数字
+
+\b：表示匹配词的边界
+
+. ：表示匹配除回车（\r）、换行(\n) 、行分隔符（\u2028）和段分隔符（\u2029）以外的所有字符
+
+*：表示星号表示某个模式出现0次或多次，等同于{0,}
+
++：表示加号表示某个模式出现1次或多次，等同于{1,}
+
+？：问号表示某个模式出现0次或1次，等同于{0, 1}
+
+x{3}：表示查找符合x出现三次及以上的元素
+
+^：匹配开头
+
+$:匹配结尾
+# 写一个函数trim(str)，去除字符串两边的空白字符
+```
+function trim(str){
+return str.replace(/^\s*|\s*$/g,"")
+}
+```
+# 写一个函数isEmail(str)，判断用户输入的是不是邮箱
+```
+function isEmail(str){
+return /^\w+@[\w.-]+$/.test(str)
+}
+```
+# 写一个函数isPhoneNum(str)，判断用户输入的是不是手机号
+```
+function isPhoneNum(str){
+return /^(\86-)?13\d{9}$/.test(str)
+}
+```
+# 写一个函数isValidUsername(str)，判断用户输入的是不是合法的用户名（长度6-20个字符，只能包括字母、数字、下划线）
+```
+function isValidUsername(str){
+return /\w{str.length}/.test(str)
+}
+```
+# 写一个函数isValidPassword(str), 判断用户输入的是不是合法密码（长度6-20个字符，只包括大写字母、小写字母、数字、下划线，且至少至少包括两种）
+```
+function isValidPassword(str){
+if(str.length<6||str.length>20||/\W/.test(str)){return false}
+if(/^\d+$/.test(str)){return false}
+if(/^_+$/.test(str)){return false}
+if(/^[a-z]+$/.test(str)){return false}
+if(/^[A-Z]+$/.test(str)){return false}
+else {return true}
+}
+```
+```
+function isValidPassword(str){
+if(str.length<6||str.length>20){return false}
+var l=RegExp('\\w{'+str.length+'}')//此处注意引入写法
+if (l.test(str)){
+  var num=0
+  if(/\d/.test(str)){num++;}
+  if(/_/.test(str)){num++;}
+  if(/[a-z]/.test(str)){num++;}
+  if(/[A-Z]/.test(str)){num++;}
+}
+if(num>1){return true}
+else {return false}
+}
+isValidPassword("luo_occ")
+```
+# 写一个正则表达式，得到如下字符串里所有的颜色
+```
+var re = /#[0-9a-fA-F]{6}/g
+var subj = "color: #121212; background-color: #AA00ef; width: 12px; bad-colors: f#fddee "
+console.log( subj.match(re) ) 
+```
+# 改写代码，让其输出[""hunger"", ""world""].
+```
+var str = 'hello  "hunger" , hello "world"';
+var pat =  /"[\w]*"/g;
+str.match(pat);
+```
+
