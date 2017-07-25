@@ -305,6 +305,13 @@ else {return true}
 }
 ```
 ```
+//密码强度正则，最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+var pPattern = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
+//输出 true
+console.log("=="+pPattern.test("caibaojian#"));
+```
+
+```
 function isValidPassword(str){
 if(str.length<6||str.length>20){return false}
 var l=RegExp('\\w{'+str.length+'}')//此处注意引入写法
