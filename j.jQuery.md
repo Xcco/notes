@@ -1,5 +1,6 @@
 ### jQuery.fn===jQuery.prototype
 ### $(document).ready(handler) === $(handler). 
+### .width() .height()获取实际尺寸 不可见元素为0 用原生width height获取
 example:
 ```
 $(function(){
