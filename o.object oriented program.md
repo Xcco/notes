@@ -9,16 +9,41 @@
 3. 运行构造函数
 4. 返回this（如果没有return）
 
+# OOP 指什么？有哪些特性
+Object Oriented Programming，面向对象编程  
+特性
+原则：开放封闭原则  
+1. open for extension 需求改变后可以对模块进行扩展以满足新行为
+2. closed for modification 扩展时不改动源代码或二进制代码
+要素：
+1. 封装：把多种方法属性放在一起使用
+2. 继承：子类继承父类方法属性
+3. 多态：不同类可以定义相同方法属性
+# 如何通过构造函数的方式创建一个拥有属性和方法的对象? 
+"构造函数"，其实就是一个普通函数，但是内部使用了**this**变量。对构造函数使用**new**运算符，就能生成实例，并且this变量会绑定在实例对象上。 
+# prototype 是什么？有什么特性 
+每一个**函数**在创建之后都会拥有一个名为prototype的属性，这个属性指向函数的原型对象。  
+特性：
+- 原型对象上的所有属性和方法，都能被派生对象共享。 
+- 通过构造函数生成实例对象时，会自动为实例对象分配原型对象。每一个构造函数都有一个prototype 属性，这个属性就是实例对象的原型对象。
+- prototype更改后，其实例也将发生变化
+# 画出如下代码的原型图
+
+
+
 
 
 # 封装
 ##  构造函数模式
 所谓"构造函数"，其实就是一个普通函数，但是内部使用了**this**变量。对构造函数使用**new**运算符，就能生成实例，并且this变量会绑定在实例对象上。  
 ## constructor
-constructor属性，指向它们的构造函数。由new操作生成 如果重新赋值prototype 需要添加constructor
+有实例的constructor和prototype的constructor之分
+实例的constructor指向它们的构造函数。
+prototype的constructor属性，指向函数本身。如果指定了构造函数 则指向构造函数，由new操作生成。所以如果重新赋值prototype 需要添加constructor
+**实例指向构造函数，构造函数指向自己 所以构造函数改变prototype时要把constructor指向自己**
 ## prototype
 每一个**函数**都有一个prototype属性，指向另一个对象。这个对象的所有属性和方法，都会被构造函数的实例继承。
-**实例指向构造函数，构造函数指向自己 所以构造函数改变prototype时要把constructor指向自己**
+
 ##  isPrototypeOf()
 这个方法用来判断，某个proptotype对象和某个实例之间的关系。
 ## hasOwnProperty()
