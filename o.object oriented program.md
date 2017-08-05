@@ -66,7 +66,7 @@ in运算符还可以用来遍历某个对象的所有属性。
 ```
 Cat.prototype = new Animal();
 Cat.prototype.constructor = Cat;//不要忘了
-  ```
+```
 ## 直接继承prototype
 ```
 Cat.prototype = Animal.prototype;
