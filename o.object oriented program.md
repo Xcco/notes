@@ -28,8 +28,26 @@ Object Oriented Programming，面向对象编程  
 - 通过构造函数生成实例对象时，会自动为实例对象分配原型对象。每一个构造函数都有一个prototype 属性，这个属性就是实例对象的原型对象。
 - prototype更改后，其实例也将发生变化
 # 画出如下代码的原型图
+# 创建一个 Car 对象，拥有属性name、color、status；拥有方法run，stop，getStatus 
+```
+function Car(name,color,status){
+   this.name=name;
+   this.color=color;
+   this.status=status;
+}
+Car.prototype.run=function(){
+    console.log('running');
+};
+Car.prototype.stop=function(){
+    console.log('stop');
+};
+Car.prototype.getStatus=function(){
+   console.log(this.status);
+};
+```
+# 创建一个 GoTop 对象，当 new 一个 GotTop 对象则会在页面上创建一个回到顶部的元素，点击页面滚动到顶部。拥有以下属性和方法
 
-
+# 使用木桶布局实现一个图片墙
 
 
 
