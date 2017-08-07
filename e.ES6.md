@@ -27,6 +27,129 @@ const声明一个只读的常量。一旦声明，常量的值就不能改变。
 ```
 const foo = Object.freeze({});
 ```
+# 字符串扩展
+### 字符的 Unicode 表示法
+新增\u{}表示unicode
+### includes(), startsWith(), endsWith()
+- includes()：返回布尔值，表示是否找到了参数字符串。
+- startsWith()：返回布尔值，表示参数字符串是否在源字符串的头部。
+- endsWith()：返回布尔值，表示参数字符串是否在源字符串的尾部。
+支持添加参数
+```
+var s = 'Hello world!';
+
+s.startsWith('world', 6) // true
+s.endsWith('Hello', 5) // true
+s.includes('Hello', 6) // false
+```
+### repeat()
+repeat方法返回一个新字符串，表示将原字符串重复n次。
+- 参数如果是小数，会被取整。是负数或者Infinity，会报错。
+### padStart()，padEnd()
+ES2017 引入了字符串补全长度的功能。如果某个字符串不够指定长度，会在头部或尾部补全。padStart()用于头部补全，padEnd()用于尾部补全。
+```
+'x'.padStart(5, 'ab') // 'ababx'
+'x'.padStart(4, 'ab') // 'abax'
+
+'x'.padEnd(5, 'ab') // 'xabab'
+'x'.padEnd(4, 'ab') // 'xaba'
+```
+padStart和padEnd一共接受两个参数，第一个参数用来指定字符串的最小长度，第二个参数是用来补全的字符串。
+padStart的常见用途是为数值补全指定位数。下面代码生成10位的数值字符串。
+```
+'1'.padStart(10, '0') // "0000000001"
+'12'.padStart(10, '0') // "0000000012"
+'123456'.padStart(10, '0') // "0000123456"
+```
+另一个用途是提示字符串格式。
+```
+'12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
+'09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+```
+## 模板字符串
+- 使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中。
+- 模板字符串中嵌入变量，需要将变量名写在${}之中。大括号内部可以放入任意的JavaScript表达式，可以进行运算，以及引用对象属性。
+- 模板字符串之中还能调用函数。
+模板字符串还能嵌套。
+```
+const tmpl = addrs => `
+  <table>
+  ${addrs.map(addr => `
+    <tr><td>${addr.first}</td></tr>
+    <tr><td>${addr.last}</td></tr>
+  `).join('')}
+  </table>
+`;
+```
+上面代码中，模板字符串的变量之中，又嵌入了另一个模板字符串，使用方法如下。
+```
+const data = [
+    { first: '<Jane>', last: 'Bond' },
+    { first: 'Lars', last: '<Croft>' },
+];
+
+console.log(tmpl(data));
+// <table>
+//
+//   <tr><td><Jane></td></tr>
+//   <tr><td>Bond</td></tr>
+//
+//   <tr><td>Lars</td></tr>
+//   <tr><td><Croft></td></tr>
+//
+// </table>
+```
+## 标签模板
+模板字符串的功能，不仅仅是上面这些。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。
+```
+alert`123`
+// 等同于
+alert(123)
+```
+如果模板字符里面有变量，就不是简单的调用了，而是会将模板字符串先处理成多个参数，再调用函数。
+```
+var a = 5;
+var b = 10;
+
+tag`Hello ${ a + b } world ${ a * b }`;
+// 等同于
+tag(['Hello ', ' world ', ''], 15, 50);
+```
+上面代码中，模板字符串前面有一个标识名tag，它是一个函数。整个表达式的返回值，就是tag函数处理模板字符串后的返回值。
+- 标签模板”的一个重要应用，就是过滤HTML字符串，防止用户输入恶意内容。
+## String.raw()
+ES6还为原生的String对象，提供了一个raw方法。
+
+String.raw方法，往往用来充当模板字符串的处理函数，返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串，对应于替换变量后的模板字符串。
+```
+String.raw`Hi\n${2+3}!`;
+// "Hi\\n5!"
+
+String.raw`Hi\u000A!`;
+// 'Hi\\u000A!'
+```
+如果原字符串的斜杠已经转义，那么String.raw不会做任何处理。
+```
+String.raw`Hi\\n`
+// "Hi\\n"
+```
+String.raw的代码基本如下。
+```
+String.raw = function (strings, ...values) {
+  var output = "";
+  for (var index = 0; index < values.length; index++) {
+    output += strings.raw[index] + values[index];
+  }
+
+  output += strings.raw[index]
+  return output;
+}
+```   
+String.raw方法可以作为处理模板字符串的基本方法，它会将所有变量替换，而且对斜杠进行转义，方便下一步作为字符串来使用。
+
+String.raw方法也可以作为正常的函数使用。这时，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。
+
+
 # function
 ### 默认参数
 ES6 允许为函数的参数设置默认值，即直接写在参数定义的后面。
