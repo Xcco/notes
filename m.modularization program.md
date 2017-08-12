@@ -45,3 +45,13 @@ var module1 = ( function (mod){
 # require.js
 1）实现js文件的异步加载，避免网页失去响应；  
 2）管理模块之间的依赖性，便于代码的编写和维护。
+
+### baseUrl
+config中 baseUrl设置为data-main指定的文件所在的路径，这里是 js/ (所以重新设置一般也依据于此 js/xxx)
+
+
+
+
+
+
+
