@@ -4,7 +4,7 @@
 - file 显示文件信息
 - less 浏览文件内容
 - -r, --recursive 递归操作 一般调整文件夹会用到
-(通配符)[https://i.loli.net/2017/08/15/599230c31dcd9.png]
+![通配符](https://i.loli.net/2017/08/15/599230c31dcd9.png)
 # 概念
 shell 就是一个程序，它接受从键盘输入的命令， 然后把命令传递给操作系统去执行。，bash 是最初 Unix 上shell 程序的增强版。
 
