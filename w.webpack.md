@@ -1,6 +1,7 @@
 # 概念
 webpack 聚焦于项目中的所有资源(asset)，而浏览器不需要关注考虑这些（明确的说，这并不意味着所有资源(asset)都必须打包在一起）。webpack 把每个文件(.css, .html, .scss, .jpg, etc.) 都作为模块处理。然而 webpack 自身只理解 JavaScript。
 核心：入口(entry)、输出(output)、loader、插件(plugins)
+### 一切皆模块 只有一个入口
 ### entry
 可以将应用程序的入口起点认为是根上下文(contextual root) 或 app 第一个启动文件。
 ### output
