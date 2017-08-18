@@ -48,5 +48,16 @@ module: {
       ]
     }
  ```
- path 最好是绝对路径
- JSON 支持实际上是内置的
+# 路径
+entry => loaders => webpack => output
+# attention
+- path 最好是绝对路径
+- JSON 支持实际上是内置的
+- '[chunkhash:3]_[name].js' //前置哈希数 位数 名字 hash=>webpack编译过程 chunkhash=>webpack对每个文件hash
+- library 将输出形成包供别人引用
+- libraryTarget 包规范格式 通常为 'umd'universal module difinition
+- publicPath 指定异步加载文件位置 与服务器位置有关 
+- chunkFilename 指定异步加载文件名
+- devtool:'source map' 源文件debug
+- plungins webpack.ProvidePlugin()自定义插件 部分替代require()功能 
+-plungins webpack.optimize.commonsChunkplugin()提供常用功能
