@@ -215,9 +215,37 @@ length属性的含义是，该函数预期传入的参数个数。同理，rest 
 let s = Symbol();
 - Symbol函数前不能使用new命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。不能添加属性。基本上，它是一种类似于字符串的数据类型。
 - Symbol函数可以接受一个字符串作为参数 Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
+- Symbol 值也可以转为布尔值，但是不能转为数值。
+- Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。
+```
+var mySymbol = Symbol();
 
+// 第一种写法
+var a = {};
+a[mySymbol] = 'Hello!';
 
+// 第二种写法
+var a = {
+  [mySymbol]: 'Hello!'
+};
+//如果mySymbol不放在方括号中，该属性的键名就是字符串s，而不是s所代表的那个 Symbol 值。
 
+// 第三种写法
+var a = {};
+Object.defineProperty(a, mySymbol, { value: 'Hello!' });
 
+// 以上写法都得到同样结果
+a[mySymbol] // "Hello!"
 
-
+//Symbol 值作为对象属性名时，不能用点运算符。
+a[mySymbol] // "Hello!"
+```
+### 消除魔术字符串 
+魔术字符串指的是，在代码之中多次出现、与代码形成强耦合的某一个具体的字符串或者数值。风格良好的代码，应该尽量消除魔术字符串，改由含义清晰的变量代替。
+将魔法字符串定义为一个对象的属性
+### 遍历
+Symbol 作为属性名，该属性不会出现在for...in、for...of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol 属性名。
+- Reflect.ownKeys 方法可以返回所有类型的键名，包括常规键名和 Symbol 键名。
+- 由于以 Symbol 值作为名称的属性，不会被常规方法遍历得到。我们可以利用这个特性，为对象定义一些非私有的、但又希望只用于内部的方法。
+### 
+#
