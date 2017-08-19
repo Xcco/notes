@@ -210,8 +210,11 @@ foo() // TypeError: Cannot read property 'x' of undefined
 指定了默认值以后，函数的length属性，将返回没有指定默认值的参数个数。也就是说，指定了默认值后，length属性将失真。  
 length属性的含义是，该函数预期传入的参数个数。同理，rest 参数也不会计入length属性。
 
-
-
+# symbol
+引入一种机制，保证每个属性的名字都是独一无二的，从根本上防止属性名的冲突。  Symbol表示独一无二的值。
+let s = Symbol();
+- Symbol函数前不能使用new命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。不能添加属性。基本上，它是一种类似于字符串的数据类型。
+- Symbol函数可以接受一个字符串作为参数 Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
 
 
 
