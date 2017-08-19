@@ -66,3 +66,40 @@ background直接加color
 background含background-size 时，需要background-position 值使 用一个斜杠（ / ）作为分隔。消除歧义
 ### 预处理器 
 - 抽象泄漏法则：“所有重大的抽象机制在某种程度 上都存在泄漏的情况。
+# background & border
+### background-clip 阻止内容溢出
+### 多重边框 
+- box-shadow:0 0 0 10px #655 //只有扩张半径 无偏移及模糊 位置要用margin补偿
+- outline/outline-offset//outline不会依附圆角而是保持直角
+### 背景定位
+```
+方案1
+background-position : right 20px bottom 10px;//这里指img
+方案2
+padding: 10px ; 
+background: url("code-pirate.svg") no-repeat #58a
+bottom right; /* 或 100% 100% */ background-origin: content-box ;
+方案3
+background-position : calc(100% - 20px) calc(100% - 10px);
+
+background-position 是以 padding box 为准的 background-origin 可以用它来改变这种行为
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
