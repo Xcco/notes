@@ -247,5 +247,486 @@ a[mySymbol] // "Hello!"
 Symbol 作为属性名，该属性不会出现在for...in、for...of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol 属性名。
 - Reflect.ownKeys 方法可以返回所有类型的键名，包括常规键名和 Symbol 键名。
 - 由于以 Symbol 值作为名称的属性，不会被常规方法遍历得到。我们可以利用这个特性，为对象定义一些非私有的、但又希望只用于内部的方法。
-### 
-#
+### Symbol.for()，Symbol.keyFor()
+Symbol.for方法接受一个字符串作为参数，然后搜索有没有以该参数作为名称的Symbol值。如果有，就返回这个Symbol值，否则就新建并返回一个以该字符串为名称的Symbol值。  
+Symbol.keyFor方法返回一个已登记的 Symbol 类型值的key。
+```
+var s1 = Symbol.for("foo");
+Symbol.keyFor(s1) // "foo"
+
+var s2 = Symbol("foo");
+Symbol.keyFor(s2) // undefined
+```
+Symbol.for为Symbol值登记的名字，是全局环境的，可以在不同的 iframe 或 service worker 中取到同一个值。
+
+- 全局变量用global[FOO_KEY]避免被覆盖 仍可以被改写
+# set
+### set
+ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+```
+// 例一
+const set = new Set([1, 2, 3, 4, 4]);
+[...set]
+// [1, 2, 3, 4]
+
+// 例二
+const items = new Set([1, 2, 3, 4, 5, 5, 5, 5]);
+items.size // 5
+
+// 例三
+function divs () {
+  return [...document.querySelectorAll('div')];
+}
+
+const set = new Set(divs());
+set.size // 56
+
+// 类似于
+divs().forEach(div => set.add(div));
+set.size // 56
+```
+- 数组去重
+```
+// 去除数组的重复成员
+1.
+[...new Set(array)]
+2.
+Array.from(new Set(array))
+```
+- 向Set加入值的时候，不会发生类型转换，所以5和"5"是两个不同的值。set内部判断等于‘===’除了NAN与NAN相等这一条
+### 属性方法
+属性：
+- Set.prototype.constructor：构造函数，默认就是Set函数。
+- Set.prototype.size：返回Set实例的成员总数。
+方法：
+- add(value)：添加某个值，返回Set结构本身。
+- delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+- has(value)：返回一个布尔值，表示该值是否为Set的成员。
+- clear()：清除所有成员，没有返回值。
+
+### 遍历
+Set 结构的实例有四个遍历方法，可以用于遍历成员。
+
+- keys()：返回键名的遍历器
+- values()：返回键值的遍历器
+- entries()：返回键值对的遍历器
+- forEach()：使用回调函数遍历每个成员
+- 扩展运算符（...）内部使用for...of循环，所以也可以用于 Set 结构
+- forEach()：使用回调函数遍历每个成员 
+- 数组的map和filter方法也可以用于 Set
+```
+let a = new Set([1, 2, 3]);
+let b = new Set([4, 3, 2]);
+
+// 并集
+let union = new Set([...a, ...b]);
+// Set {1, 2, 3, 4}
+
+// 交集
+let intersect = new Set([...a].filter(x => b.has(x)));
+// set {2, 3}
+
+// 差集
+let difference = new Set([...a].filter(x => !b.has(x)));
+// Set {1}
+```
+### weakset
+- WeakSet 的成员只能是对象，而不能是其他类型的值。
+- WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用，
+ES6 规定 WeakSet 不可遍历。
+
+```
+const a = [[1, 2], [3, 4]];
+const ws = new WeakSet(a);
+// WeakSet {[1, 2], [3, 4]}
+```
+a数组的成员成为 WeakSet 的成员，而不是a数组本身。这意味着，数组的成员只能是对象。
+### weakset方法
+- WeakSet.prototype.add(value)：向 WeakSet 实例添加一个新成员。
+- WeakSet.prototype.delete(value)：清除 WeakSet 实例的指定成员。
+- WeakSet.prototype.has(value)：返回一个布尔值，表示某个值是否在 
+# map
+JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。
+
+- 注意，只有对同一个对象的引用，Map 结构才将其视为同一个键。这一点要非常小心。
+
+# class
+```
+//定义类
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  toString() {
+    return '(' + this.x + ', ' + this.y + ')';
+  }
+}
+```
+- 类的数据类型就是函数，类本身就指向构造函数。
+
+```
+class Point {
+  constructor() {
+    // ...
+  }
+
+  toString() {
+    // ...
+  }
+
+  toValue() {
+    // ...
+  }
+}
+
+// 等同于
+
+Point.prototype = {
+  constructor() {},
+  toString() {},
+  toValue() {},
+};
+```
+- 类的内部所有定义的方法，都是不可枚举的（non-enumerable）。
+- 类必须使用new调用，否则会报错。
+- 类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式。只要你的代码写在类或模块之中，就只有严格模式可用。
+- constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor方法，如果没有显式定义，一个空的constructor方法会被默认添加。
+- 类的所有实例共享一个原型对象。
+
+- 实例的属性除非显式定义在其本身（即定义在this对象上），否则都是定义在原型上（即定义在class上）。
+
+- 生产环境中，我们可以使用 Object.getPrototypeOf 方法来获取实例对象的原型，然后再来为原型添加方法/属性。(不建议__proto__)
+
+# module
+ES6 模块的设计思想，是尽量的静态化，使得编译时就能确定模块的依赖关系 CommonJS 和 AMD 模块，都只能在运行时确定
+- CommonJS实质是整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后读取方法。运行时加载
+- ES6 import实质是从fs模块加载3个方法，其他方法不加载。这种加载称为“编译时加载”或者静态加载，即 ES6 可以在编译时就完成模块加载，效率要比 CommonJS 模块的加载方式高。当然，这也导致了没法引用 ES6 模块本身，因为它不是对象。
+### 优点
+- 不再需要UMD模块格式了，将来服务器和浏览器都会支持 ES6 模块格式。目前，通过各种工具库，其实已经做到了这一点。
+- 将来浏览器的新 API 就能用模块格式提供，不再必须做成全局变量或者navigator对象的属性。
+- 不再需要对象作为命名空间（比如Math对象），未来这些功能可以通过模块提供。
+### 严格模式 
+自动严格模式
+- 变量必须声明后再使用
+- 函数的参数不能有同名属性，否则报错
+- 不能使用with语句
+- 不能对只读属性赋值，否则报错
+- 不能使用前缀0表示八进制数，否则报错
+- 不能删除不可删除的属性，否则报错
+- 不能删除变量delete prop，会报错，只能删除属性delete global[prop]
+- eval不会在它的外层作用域引入变量
+- eval和arguments不能被重新赋值
+- arguments不会自动反映函数参数的变化
+- 不能使用arguments.callee
+- 不能使用arguments.caller
+- 禁止this指向全局对象
+- 不能使用fn.caller和fn.arguments获取函数调用的堆栈
+- 增加了保留字（比如protected、static和interface）
+### export
+export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。
+- export输出的变量就是本来的名字，但是可以使用as关键字重命名。
+```
+function v1() { ... }
+function v2() { ... }
+
+export {
+  v1 as streamV1,
+  v2 as streamV2,
+  v2 as streamLatestVersion
+};
+```
+- 必须输出接口 不要忘记{}
+```
+// 写法一
+export var m = 1;
+
+// 写法二
+var m = 1;
+export {m};
+
+// 写法三
+var n = 1;
+export {n as m};
+```
+- export语句输出的接口，与其对应的值是动态绑定关系(区别上面的静态加载)，即通过该接口，可以取到模块内部实时的值。
+```
+export var foo = 'bar';
+setTimeout(() => foo = 'baz', 500);
+//上面代码输出变量foo，值为bar，500毫秒之后变成baz。
+```
+- export/import命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，(处于条件代码块之中，就没法做静态优化了)
+### import
+```
+import {firstName, lastName, year} from './profile';
+//大括号里面的变量名，必须与被导入模块（profile.js）对外接口的名称相同。
+import { lastName as surname } from './profile';
+```
+- .js后缀可以省略。如果只是模块名，不带有路径，那么必须有配置文件
+- import命令具有提升效果，会提升到整个模块的头部，首先执行。
+- import是静态执行，所以不能使用表达式和变量
+```
+// 报错
+import { 'f' + 'oo' } from 'my_module';
+
+// 报错
+let module = 'my_module';
+import { foo } from module;
+
+// 报错
+if (x === 1) {
+  import { foo } from 'module1';
+} else {
+  import { foo } from 'module2';
+}
+```
+### 整体加载
+用星号（*）指定一个对象，所有输出值都加载在这个对象上面。
+### export default 命令
+```
+// export-default.js
+export default function () {
+  console.log('foo');
+}
+// import-default.js
+import customName from './export-default';
+customName(); // 'foo'
+```
+上面代码是一个模块文件export-default.js，它的默认输出是一个函数。
+其他模块加载该模块时，import命令可以为该匿名函数指定任意名字。
+import命令，可以用任意名称指向export-default.js输出的方法，这时就不需要知道原模块输出的函数名。需要注意的是，这时import命令后面，**不使用大括号**。
+- export default 与export刚好相反 import也没有{}
+### export 与 import 的复合写法 
+export { foo, bar } from 'my_module';
+### 跨模块常量
+```
+export const A = 1;
+```
+### import()
+用于补充实现动态加载
+import()类似于 Node 的require方法，区别主要是前者是异步加载，后者是同步加载。
+- import()加载模块成功以后，这个模块会作为一个对象，当作then方法的参数。因此，可以使用对象解构赋值的语法，获取输出接口。
+# Promise 
+Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。  
+- Promise对象的状态不受外界影响。有三种状态：Pending（进行中）、Fulfilled（已成功）和Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，
+- 一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从Pending变为Fulfiled和从Pending变为Rejected。即Resolved（已定型）这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
+- 无法取消Promise 
+- 如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。
+- 当处于Pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
+- 如果某些事件不断地反复发生，一般来说，使用 Stream 模式是比部署Promise更好的选择。
+### 用法
+Promise对象是一个构造函数，用来生成Promise实例
+```
+var promise = new Promise(function(resolve, reject) {
+  // ... some code
+
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+```
+- 接受一个函数作为参数，该函数的两个参数分别是resolve和reject。它们是两个函数，由 JavaScript 引擎提供，不用自己部署。
+```
+promise.then(function(value) {
+  // success
+}, function(error) {
+  // failure
+});
+```
+异步加载图片
+```
+function loadImageAsync(url) {
+  return new Promise(function(resolve, reject) {
+    var image = new Image();
+
+    image.onload = function() {
+      resolve(image);
+    };
+
+    image.onerror = function() {
+      reject(new Error('Could not load image at ' + url));
+    };
+
+    image.src = url;
+  });
+}
+```
+实现的 Ajax 操作
+```
+var getJSON = function(url) {
+  var promise = new Promise(function(resolve, reject){
+    var client = new XMLHttpRequest();
+    client.open("GET", url);
+    client.onreadystatechange = handler;
+    client.responseType = "json";
+    client.setRequestHeader("Accept", "application/json");
+    client.send();
+
+    function handler() {
+      if (this.readyState !== 4) {
+        return;
+      }
+      if (this.status === 200) {
+        resolve(this.response);
+      } else {
+        reject(new Error(this.statusText));
+      }
+    };
+  });
+
+  return promise;
+};
+
+getJSON("/posts.json").then(function(json) {
+  console.log('Contents: ' + json);
+}, function(error) {
+  console.error('出错了', error);
+});
+```
+- resolve函数的参数除了正常的值以外，还可能是另一个 Promise 实例
+
+```
+getJSON("/post/1.json").then(function(post) {
+  return getJSON(post.commentURL);
+}).then(function funcA(comments) {
+  console.log("Resolved: ", comments);
+}, function funcB(err){
+  console.log("Rejected: ", err);
+});
+或
+getJSON("/post/1.json").then(
+  post => getJSON(post.commentURL)
+).then(
+  comments => console.log("Resolved: ", comments),
+  err => console.log("Rejected: ", err)
+);
+```
+### Promise.prototype.catch()
+Promise.prototype.catch方法是.then(null, rejection)的别名，用于指定发生错误时的回调函数。
+- 如果Promise状态已经变成Resolved，再抛出错误是无效的。
+- Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个catch语句捕获。
+- 不要在then方法里面定义Reject状态的回调函数（即then的第二个参数），总是使用catch方法。
+- catch方法返回的还是一个 Promise 对象，因此后面还可以接着调用then方法。
+
+### Promise.all()
+Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。（全部实现才继续 交集）
+Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例。（一个实现就 并集）
+
+### Promise.resolve()
+有时需要将现有对象转为Promise对象，Promise.resolve方法就起到这个作用。
+
+### Promise.reject()
+Promise.reject(reason)方法也会返回一个新的 Promise 实例，该实例的状态为rejected。
+
+### done() 
+提供一个done方法，总是处于回调链的尾端，保证抛出任何可能出现的错误。
+
+### finally()
+finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。它与done方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行。
+
+### 应用
+我们可以将图片的加载写成一个Promise，一旦加载完成，Promise的状态就发生变化。
+结构 object=function (path) {return promise Instance}
+```
+const preloadImage = function (path) {
+  return new Promise(function (resolve, reject) {
+    var image = new Image();
+    image.onload  = resolve;
+    image.onerror = reject;
+    image.src = path;
+  });
+};
+```
+Generator函数与Promise的结合
+```
+function getFoo () {
+  return new Promise(function (resolve, reject){
+    resolve('foo');
+  });
+}
+
+var g = function* () {
+  try {
+    var foo = yield getFoo();
+    console.log(foo);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+function run (generator) {
+  var it = generator();
+
+  function go(result) {
+    if (result.done) return result.value;
+
+    return result.value.then(function (value) {
+      return go(it.next(value));
+    }, function (error) {
+      return go(it.throw(error));
+    });
+  }
+
+  go(it.next());
+}
+
+run(g);
+```
+### Promise.try()
+不区分同异步函数时 同步函数也会放到末尾执行
+解决方法
+```
+1.
+//同步
+const f = () => console.log('now');
+(async () => f())();
+console.log('next');
+//异步
+(async () => f())()
+.then(...)
+.catch(...)
+2.
+const f = () => console.log('now');
+(
+  () => new Promise(
+    resolve => resolve(f())
+  )
+)();
+console.log('next');
+3.
+const f = () => console.log('now');
+Promise.try(f);
+console.log('next');
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
