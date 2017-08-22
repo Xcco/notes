@@ -84,14 +84,81 @@ background-position : calc(100% - 20px) calc(100% - 10px);
 
 background-position 是以 padding box 为准的 background-origin 可以用它来改变这种行为
 ```
+### 条纹背景
+```
+radial-gradient()//辐射状渐变
+background : linear-gradient(#fb3 20%, #58a 80%);//渐变 百分数表示位置
+background : linear-gradient(#fb3 50%, #58a 50%);//位置重叠则产生色条
+{background : linear-gradient(#fb3 30%, #58a 30%); background-size : 100% 30px;}//size决定一次渐变大小 其余自动填充形成条纹
+{background : linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0); background-size : 100% 45px;}
+//后面位置如果比前面小 则自动相等 所以可以添为0
+repeating-linear-gradient() 和 repeating-radial-gradient() 。
+```
+底色固定 上层不同透明度格栅
+```
+{background : #58a; 
+background-image : repeating-linear-gradient(30deg,
+hsla(0,0%,100%,.1), 
+hsla(0,0%,100%,.1) 15px, transparent 0, transparent 30px);}
+```
+### 网格
+```
+background : #58a; 
+background-image :
+linear-gradient(white 1px, transparent 0),
+linear-gradient(90deg, white 1px, transparent 0); 
+background-size : 30px 30px;
+```
+### 伪随机背景
+这个技巧被 Alex Walker 定名为“蝉原则”， 他最先提出了通过质数来 增加随机真实性的想法。请注意这个方法不仅适用于背景，还可以用于其他 涉及有规律重复的情况。
 
+# 形状
+### 圆
+border-radius 可以单独指定水平和垂直半径， 只要用一个斜杠（ / ）分隔这两个值即可。
 
+### 平行四边形
+skew() 的变形会使内容变形
+```
+.button { 
+  position : relative; /* 其他的文字颜色、内边距等样式…… */ } 
+.button::before { 
+  content : ''; /* 用伪元素来生成一个矩形 */ 
+  position : absolute; 
+  top : 0; 
+  right : 0; 
+  bottom : 0; 
+  left : 0; 
+  z-index : -1; 
+  background : #58a; 
+  transform : skew(45deg); 
+}
+```
+### 菱形
+1.平行四边形旋转
+2.clip-path : polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 
-
-
-
-
-
+### 切角
+```
+background : #58a; background ://回退机制
+linear-gradient(-45deg, transparent 15px, #58a 0);
+```
+//多个切角要考虑背景不重复
+```
+div {
+	background: #58a;
+	background: linear-gradient(135deg, transparent 15px, #58a 0) top left,
+	            linear-gradient(-135deg, transparent 15px, #58a 0) top right,
+	            linear-gradient(-45deg, transparent 15px, #58a 0) bottom right,
+	            linear-gradient(45deg, transparent 15px, #58a 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+	
+	padding: 1em 1.2em;
+	max-width: 12em;
+	color: white;
+	font: 150%/1.6 Baskerville, Palatino, serif;
+}
+```
 
 
 
