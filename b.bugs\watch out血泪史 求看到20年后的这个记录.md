@@ -3,3 +3,4 @@
 # node里 #! /usr/bin/env node 是env！！！不是nev！！！
 ### code EINTEGRITY一般是代理问题
 ### getElement除了id没有s其它都有s
+### typeof 小写
