@@ -102,3 +102,75 @@ node脚本可以作为命令行脚本使用。
 #!/usr/bin/env node
 ```
 console.log用于输出内容到标准输出，process.stdin用于读取标准输入，child_process.exec()用于执行一个shell命令。
+
+
+
+
+# process
+process对象是 Node 的一个全局对象，提供当前 Node 进程的信息。它可以在脚本的任意位置使用，不必通过require命令加载。该对象部署了EventEmitter接口。
+### 属性
+系统信息：
+- process.argv：返回一个数组，成员是当前进程的所有命令行参数。它的第一个成员总是node，第二个成员是脚本文件名，其余成员是脚本文件的参数。
+```
+ node argv.js a b c
+[ 'node', '/path/to/argv.js', 'a', 'b', 'c' ]
+//纯参数部分
+var myArgs = process.argv.slice(2);
+```
+- process.env：返回一个对象，成员为当前Shell的环境变量，比如process.env.HOME。
+通常的做法是，新建一个环境变量NODE_ENV，用它确定当前所处的开发阶段，生产阶段设为production，开发阶段设为develop或staging，然后在脚本中读取process.env.NODE_ENV即可。
+```
+//改变环境变量
+ export NODE_ENV=production && node app.js
+//或者
+ NODE_ENV=production node app.js
+```
+- process.execPath属性返回执行当前脚本的Node二进制文件的绝对路径。
+### Shell 接口
+- process.stdout属性返回一个对象，表示标准输出。该对象的write方法等同于console.log，可用在标准输出向用户显示内容。
+- process.stdin返回一个对象，表示标准输入。
+- process.stderr属性指向标准错误。
+### 方法
+- process.cwd()，process.chdir()
+cwd方法返回进程的当前目录（绝对路径），chdir方法用来切换目录。  
+注意，process.cwd()与__dirname的区别。前者进程发起时的位置，后者是脚本的位置，两者可能是不一致的。  
+比如，node ./code/program.js，对于process.cwd()来说，返回的是当前目录（.）；对于__dirname来说，返回是脚本所在目录，即./code/program.js。
+- process.nextTick()
+process.nextTick将任务放到当前一轮事件循环（Event Loop）的尾部。
+- process.on()
+process对象部署了EventEmitter接口，可以使用on方法监听各种事件，并指定回调函数。
+```
+process支持的事件
+uncaughtException事件：只要有错误没有捕获，就会触发这个事件。
+data事件：数据输出输入时触发
+SIGINT事件：接收到系统信号SIGINT时触发，主要是用户按Ctrl + c时触发。
+SIGTERM事件：系统发出进程终止信号SIGTERM时触发
+exit事件：进程退出前触发
+```
+- process.kill()
+process.kill方法用来对指定ID的线程发送信号，默认为SIGINT信号。
+### 进程的退出码
+进程退出时，会返回一个整数值，表示退出时的状态。这个整数值就叫做退出码。下面是常见的Node进程退出码。
+- 0，正常退出
+- 1，发生未捕获错误
+- 5，V8执行错误
+- 8，不正确的参数
+- 128 + 信号值，如果Node接受到退出信号（比如SIGKILL或SIGHUP），它的退出码就是128加上信号值。由于128的二进制形式是10000000, 所以退出码的后七位就是信号值。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
