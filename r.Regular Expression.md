@@ -1,6 +1,17 @@
 - (?:xxx)?:在前 xxx仍属于正则表达式 但不列入分组
 - exp1(?=exp2)	匹配后面是exp2的exp1 
 - exp1(?!exp2)  匹配后面不是exp2的exp1
+```
+返回值
+r.test(s)//boolean
+r.exec(s)//string
+s.match(r)//array
+s.search(r)//index/-1
+s.replace(r)//string
+s.split(r)//array
+s.match(r)//array
+s.match(r)//array
+```
 ### 在ES5规范中正则表达式和字符串常量不一样，每次声明都会重新创建变量
 ### 原则上正则的一个字符对应一个字符，我们可以用[]把它们括起来，让[]这个整体对应一个字符
 ### 正则表达式字面量每次生成一个新的正则表达式
