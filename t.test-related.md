@@ -2,7 +2,11 @@
 - 新数组:concat filter map slice   
 - 旧数组:fill reverse pop push shift unshift splice   
 - for...in...不保证顺序   
-
+``` 
+reduce(function(pre,cur,i,a){
+        return pre + cur;
+    });
+```
 ### string
 
 ### 循环
