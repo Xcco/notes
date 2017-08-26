@@ -1,4 +1,5 @@
 # 模块(需要引入)对象不需要
+[文档](http://nodejs.cn/api/stream.html)
 buffer对象 process对象
 - treat Node Streams as objects that emit events.
 
@@ -467,12 +468,42 @@ rs.pipe(process.stdout);
 - 调用pipe方法将数据送往一个可写数据流
 如果转为流动态时，没有data事件的监听函数，也没有pipe方法的目的地，那么数据将遗失。  
 让流动态转为暂停态。
-
 - 不存在pipe方法的目的地时，调用pause方法
 - 存在pipe方法的目的地时，移除所有data事件的监听函数，并且调用unpipe方法，移除所有pipe方法的目的地
- * asdasdad、
-* asdasd
- * asdasd
+
+
+### stream.Readable 类
+* Class: stream.Readable
+    * Event: 'close'
+    * Event: 'data'
+    * Event: 'end'
+    * Event: 'err'
+    * Event: 'readable'
+
+### readable 属性
+一个数据流的readable属性返回一个布尔值。如果数据流是一个仍然打开的可读数据流，就返回true，否则返回false。
+### read()
+建议开发人员避免使用'readable'事件和readable.read（）方法，使用readable.pipe()或'data'事件代替。
+### setEncoding()
+调用该方法，会使得数据流返回指定编码的字符串，而不是缓存之中的二进制对象。比如，调用setEncoding('utf8')，数据流会返回UTF-8字符串，调用setEncoding('hex')，数据流会返回16进制的字符串。
+
+### resume()
+resume方法会使得“可读数据流”继续释放data事件，即转为流动态。
+### pause()
+pause方法使得流动态的数据流，停止释放data事件，转而进入暂停态。任何此时已经可以读到的数据，都将停留在系统缓存。
+### isPaused()
+该方法返回一个布尔值，表示“可读数据流”被客户端手动暂停（即调用了pause方法），目前还没有调用resume方法。
+### pipe()
+pipe方法是自动传送数据的机制，就像管道一样。它从“可读数据流”读出所有数据，将其写出指定的目的地。整个过程是自动的。
+- 当来源地的数据流读取完成，默认会调用目的地的end方法，就不再能够写入。对pipe方法传入第二个参数{ end: false }，可以让目的地的数据流保持打开。
+
+
+
+
+
+
+
+
 
 
 
