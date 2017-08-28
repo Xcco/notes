@@ -497,8 +497,19 @@ pause方法使得流动态的数据流，停止释放data事件，转而进入�
 pipe方法是自动传送数据的机制，就像管道一样。它从“可读数据流”读出所有数据，将其写出指定的目的地。整个过程是自动的。
 - 当来源地的数据流读取完成，默认会调用目的地的end方法，就不再能够写入。对pipe方法传入第二个参数{ end: false }，可以让目的地的数据流保持打开。
 
+# querystring
 
-
+### querystring.parse()
+querystring.parse()方法用于将一个查询字符串解析为 JavaScript 对象。
+```
+var str = 'foo=bar&abc=xyz&abc=123';
+querystring.parse(str)
+// { foo: 'bar', abc: [ 'xyz', '123' ] }
+```
+querystring.parse(str[, sep[, eq[, options]]])  
+- str：需要解析的查询字符串
+- sep：多个键值对之间的分隔符，默认为&
+- eq：键名与键值之间的分隔符，默认为=
 
 
 
