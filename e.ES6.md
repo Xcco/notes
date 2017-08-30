@@ -144,7 +144,7 @@ String.raw = function (strings, ...values) {
   output += strings.raw[index]
   return output;
 }
-```   
+```
 String.raw方法可以作为处理模板字符串的基本方法，它会将所有变量替换，而且对斜杠进行转义，方便下一步作为字符串来使用。
 
 String.raw方法也可以作为正常的函数使用。这时，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。
@@ -702,7 +702,7 @@ Promise.try(f);
 console.log('next');
 ```
 
-
+# class
 
 
 
