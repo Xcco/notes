@@ -4,3 +4,4 @@
 ### code EINTEGRITY一般是代理问题
 ### getElement除了id没有s其它都有s
 ### typeof 小写
+### 创建原型时不要忘了 this！
