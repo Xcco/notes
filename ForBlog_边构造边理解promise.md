@@ -9,51 +9,131 @@ https://zhuanlan.zhihu.com/p/21834559
 4. 值穿透。下面会细讲。
 
 ```
-var promise = new MyPromise(function(resolve, reject) {
-  /*
-    如果操作成功，调用resolve并传入value
-    如果操作失败，调用reject并传入reason
-  */
+/*
+  实现目标
+*/
+
+let promise = new MyPromise(function(resolve, reject) {
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
 })
 
-function MyPromise(executor) {
-  var self = this
-
-  self.status = 'pending'
-  self.data = undefined
-  self.onResolve = []
-  self.onReject = []
-/*
-  resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 Pending 变为 Resolved），
-  在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；
-*/
-  function resolve(value) {
-    if (self.status === 'pending'){
-      self.status = 'resolved'
-
+class MyPromise {
+  constructor(executor) {
+    let self = this
+    self.status = 'pending'
+    self.data = undefined
+    self.onResolve = []
+    self.onReject = []
+    try {
+      executor(resolve, reject)
+    } catch(e) {
+      reject(e)
     }
   }
 
-  function reject(error) {
-  // TODO
+  /*
+    resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 Pending 变为 Resolved），
+    在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；具体实现为存储在promise的方法上，
+    reject类似。
+  */
+  resolve(value) {
+    if (self.status === 'pending'){
+      self.status = 'resolved'
+      self.data = value
+      for(let i = 0; i < self.onResolve.length; i++) {
+        self.onResolve[i](value)
+      }
+    }
   }
-  try { // 考虑到执行executor的过程中有可能出错，所以我们用try/catch块给包起来，并且在出错后以catch到的值reject掉这个Promise
-    executor(resolve, reject) // 执行executor
-  } catch(e) {
-    reject(e)
+
+  reject(error) {
+    if (self.status === 'pending'){
+      self.status = 'resolved'
+      self.data = value
+      for(let i = 0; i < self.onResolve.length; i++) {
+        self.onResolve[i](value)
+      }
+    }
+  }
+
+  /*
+  then 方法必须返回一个 promise。规范里没有明确说明返回一个新的 promise
+  还是复用老的 promise（即 return this），大多数实现都是返回一个新的 promise，
+  而且复用老的 promise 可能改变内部状态，这与规范也是相违背的。
+  */
+  then = function(onResolved, onRejected) {
+    let promise2
+    onResolved = typeof onResolved === 'function' ? onResolved : function(value) {return value}//值的穿透
+    onRejected = typeof onRejected === 'function' ? onRejected : function(error) {return error}
+    if (self.status === 'resolved') {
+    return promise2 = new Promise(function(resolve, reject) {
+      try {
+        var x = onResolved(self.data)
+        if (x instanceof Promise) { 
+          x.then(resolve, reject)
+        }
+        resolve(x)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+  if (self.status === 'rejected') {
+    return promise2 = new Promise(function(resolve, reject) {
+      try {
+        var x = onRejected(self.data)
+        if (x instanceof Promise) {
+          x.then(resolve, reject)
+        }
+      } catch (e) {
+        reject(e)
+      }
+    })
+  }
+
+    else if (self.status === 'pending') {
+      return promise2 = new Promise(function(resolve, reject) {
+
+      })
+    }
+    /*
+     pending状态下就把相应函数放在处理函数数列中
+     */
+    if (self.status === 'pending') {
+    return promise2 = new Promise(function(resolve, reject) {
+      self.onResolve.push(function(value) {
+        try {
+          var x = onResolved(self.data)
+          if (x instanceof Promise) {
+            x.then(resolve, reject)
+          }
+        } catch (e) {
+          reject(e)
+        }
+      })
+
+      self.onReject.push(function(error) {
+        try {
+          var x = onRejected(self.data)
+          if (x instanceof Promise) {
+            x.then(resolve, reject)
+          }
+        } catch (e) {
+          reject(e)
+        }
+      })
+    })
+  }
+  catch = function(onRejected) {
+    return this.then(null, onRejected)
   }
 }
 
-
-function timeout(ms) {
-  return new Promise(function(resolve, reject){
-    setTimeout(resolve, ms, 'done');
-  })
-}
-
-timeout(100).then((value) => {
-  console.log(value);
-});
 ```
 
 
