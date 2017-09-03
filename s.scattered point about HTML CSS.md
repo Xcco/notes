@@ -11,7 +11,7 @@ aside
 footer
 nav
 
-# text-align:center;
+### text-align:center;
 - 写在父元素 作用于子元素 img为子元素 写在上一级 写在div上 作用于内部文字
 - 具有继承性 所以子元素为块级元素 其内部文字也会自动居中
 
@@ -33,3 +33,36 @@ css实体 \name
 块级元素才有伪元素
 
 white-space
+
+
+# <meta>
+The <meta> tag provides metadata about the HTML document. Metadata will not be displayed on the page, but will be machine parsable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
