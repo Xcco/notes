@@ -27,6 +27,35 @@ const声明一个只读的常量。一旦声明，常量的值就不能改变。
 ```
 const foo = Object.freeze({});
 ```
+# Iterator
+1. 为各种数据结构，提供一个统一的、简便的访问接口；
+2. 使得数据结构的成员能够按某种次序排列；
+3. ES6创造了一种新的遍历命令for...of循环，Iterator接口主要供for...of消费。
+###  Iterator 接口
+一种数据结构只要部署了 Iterator 接口(Symbol.iterator属性)，我们就称这种数据结构是”可遍历的“（iterable）。
+- 当使用for...of循环遍历某种数据结构时，该循环会自动去寻找 Iterator 接口。
+```
+Array
+Map
+Set
+String
+TypedArray
+函数的 arguments 对象
+NodeList 对象
+```
+
+
+
+
+
+
+
+# Generator/生成器
+- 普通函数使用function声明，而生成器函数使用function*声明。
+- Generator is Iterator
+- 在生成器函数内部，有一种类似return的语法：关键字yield。二者的区别是，普通函数只可以return一次，而生成器函数可以yield多次（当然也可以只yield一次）。在生成器的执行过程中，遇到yield表达式立即暂停，后续可恢复执行状态。
+
+
 # 字符串扩展
 ### 字符的 Unicode 表示法
 新增\u{}表示unicode
