@@ -1,3 +1,4 @@
+**停止使用arguments(不定参数和默认参数完美代替) var**
 # let&const
 ### let
 用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。**let实际上为 JavaScript 新增了块级作用域。**
@@ -128,12 +129,36 @@ console.log(tmpl(data));
 //
 // </table>
 ```
-## 标签模板
+### 标签模板
 模板字符串的功能，不仅仅是上面这些。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。
+
 ```
 alert`123`
 // 等同于
 alert(123)
+```
+```
+var message =
+  SaferHTML`<p>${bonk.sender} 向你示好。</p>`;
+  //等同于
+var message =
+  SaferHTML(templateData, bonk.sender);
+  
+function SaferHTML(templateData) {
+  var s = templateData[0];
+  for (var i = 1; i < arguments.length; i++) {
+    var arg = String(arguments[i]);
+
+    // 转义占位符中的特殊字符。
+    s += arg.replace(/&/g, "&")
+            .replace(/</g, "<")
+            .replace(/</g, ">");
+
+    // 不转义模板中的特殊字符。
+    s += templateData[i];
+  }
+  return s;
+}
 ```
 如果模板字符里面有变量，就不是简单的调用了，而是会将模板字符串先处理成多个参数，再调用函数。
 ```
