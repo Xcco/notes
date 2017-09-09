@@ -5,3 +5,47 @@
 ### getElement除了id没有s其它都有s
 ### typeof 小写
 ### 创建原型时不要忘了 this！
+### 注意不要发生嵌套错误！
+```
+//wrong
+let vm=new Vue({
+  el:'.main',
+  data:{
+    list:list,
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ],
+    methods:{
+    addTodo(e) {
+        alert()
+      if(e.key==13){
+        alert()
+        this.list.push({title:e.target.value})
+        }
+      }
+    }
+  }
+})
+//right
+let vm=new Vue({
+  el:'.main',
+  data:{
+    list:list,
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ]
+  },
+  methods:{
+    addTodo(e) {
+        alert()
+      if(e.key==13){
+        alert()
+        this.list.push({title:e.target.value})
+      }
+    }
+  }
+})
+```
+
