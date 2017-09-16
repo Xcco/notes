@@ -1,9 +1,4 @@
-# 输出风格
-- 嵌套输出方式 nested
-- 展开输出方式 expanded  
-- 紧凑输出方式 compact 
-- 压缩输出方式 compressed
-### 我用展开 最后还是归为压缩
+
 在编译的时候带上参数“ --style expanded”:   
 sass --watch test.scss:test.css --style expanded
 --style compressed
@@ -13,7 +8,7 @@ sass --watch test.scss:test.css --style expanded
 - !default默认值
 - ！global全局变量
 
-# 嵌套（金立避免嵌套过多）
+# 嵌套（避免嵌套过多）
 ### 选择器嵌套
 ```
 nav {
