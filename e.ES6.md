@@ -52,6 +52,8 @@ NodeList 对象
 
 
 # Generator/生成器
+- value是yield后面跟的值 yield返回值为undefined next($)$是指定上一次yield的返回值 第一个next用于启动 参数无用
+- for of 可直接调用
 - 普通函数使用function声明，而生成器函数使用function*声明。
 - Generator is Iterator
 - 在生成器函数内部，有一种类似return的语法：关键字yield。二者的区别是，普通函数只可以return一次，而生成器函数可以yield多次（当然也可以只yield一次）。在生成器的执行过程中，遇到yield表达式立即暂停，后续可恢复执行状态。
