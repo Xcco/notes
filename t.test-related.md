@@ -1,6 +1,6 @@
 ### array方法
 - 新数组:concat filter map slice   
-- 旧数组:fill reverse pop push shift unshift splice   
+- 旧数组:fill reverse pop push shift unshift splice sort  
 - for...in...不保证顺序   
 ### statements & declaration
 - for(var index in ...) /  for(var value of ...)
