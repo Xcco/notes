@@ -12,9 +12,9 @@ the relative order of elements with the same key value is preserved by the algor
 
 # 类别
 * Comparison-based Sorting Algorithms:
-  * BUB - Bubble Sort, - O(n^2)
-  * SEL - Selection Sort, - O(n^2) - 移动数据较少
-  * INS - Insertion Sort, - O(n^2)
+  * BUB - Bubble Sort, - O(n^2)
+  * SEL - Selection Sort, - O(n^2) - 移动数据较少
+  * INS - Insertion Sort, - O(n^2)
   * MER - Merge Sort (recursive implementation), - O(nlgn)
   * QUI - Quick Sort (recursive implementation), 
   * R-Q - Random Quick Sort (recursive implementation). -O(nlgn)
@@ -73,19 +73,123 @@ function bubbleSort(array) {
 function selectionSort(array) {
   let i
   let j
-  let flag = true
-  for (i = 1; i < array.length && flag; i++) {
-    flag = false
-    for (j = 0; j < array.length - i; j++) {
-      if (array[j] > array[j + 1]) {
-        swap(array, j, j + 1)
-        flag = true
+  let min
+  for (i = 0; i < array.length - 1; i++) {
+    min = i
+    for (j = i + 1; j < array.length; j++) {
+      if (array[j] < array[min]) {
+        min = j
+      }
+    }
+    swap(array, i, min)
+  }
+  return array;
+}
+```
+### 插入排序
+- 比较 n-1 || n^2/4 || (n+2)(n-1)/2 
+- 交换 0 || n^2/4 || (n+4)(n-1)/2 
+```
+function insertSort(array) {
+  let min
+  for (let i = 0; i < array.length - 1; i++) {
+    if (array[i] > array[i + 1]) {
+      swap(array, i, i + 1)
+      for (let j = i - 1; j >= 0; j--) {
+        if (array[j] > array[j + 1]) {
+          swap(array, j, j + 1)
+        } else {
+          break
+        }
       }
     }
   }
   return array;
 }
+```
+##### 希尔排序 
+插入排序优化版
 
+### 归并排序
+时间 O(nlogn)
+空间 O(n+logn)
+```
+function mergeSort(array) {
+  function combine(a, b) {
+    let i = 0
+    let j = 0
+    let temp = []
+    for (let k = 0; i < a.length && j < b.length; k++) {
+      if (a[i] <= b[j]) {
+        temp[k] = a[i]
+        i++
+      } else {
+        temp[k] = b[j]
+        j++
+      }
+    }
+    if (i < a.length) {
+      temp = temp.concat(a.slice(i))
+    } else {
+      temp = temp.concat(b.slice(j))
+    }
+    return temp
+  }
+//递归
+  if (array.length === 1) {
+    return array
+  } else {
+    let l = Math.ceil(array.length / 2)
+    let a = mergeSort(array.slice(0, l))
+    let b = mergeSort(array.slice(l))
+    return combine(a, b)
+  }
+}
+```
+##### 优化
+将递归recursive转为迭代iteration
+```
+function mergeSort(array) {
+  function combine(a, b) {
+    let i = 0
+    let j = 0
+    let temp = []
+    for (let k = 0; i < a.length && j < b.length; k++) {
+      if (a[i] <= b[j]) {
+        temp[k] = a[i]
+        i++
+      } else {
+        temp[k] = b[j]
+        j++
+      }
+    }
+    if (i < a.length) {
+      temp = temp.concat(a.slice(i))
+    } else {
+      temp = temp.concat(b.slice(j))
+    }
+    return temp
+  }
+  let newArray=[]
+  let newArrayTemp=[]
+  for(let i=0;i<array.length;i++){
+    newArray.push([array[i]])
+  }
+  while(newArray.length>1){
+      for(let i=0;i<newArray.length/2;i++){
+      let a=newArray.slice(2*i,2*i+2)
+      if(a.length===1){
+        newArrayTemp.push(a[0])
+      }else{
+        newArrayTemp.push(combine(a[0],a[1]))
+      }
+    }
+    newArray=newArrayTemp
+    newArrayTemp=[]
+  }
+  return newArray[0]
+}
+```
 
 
 
