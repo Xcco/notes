@@ -1,6 +1,7 @@
 ### array方法
 - 新数组:concat filter map slice   
 - 旧数组:fill reverse pop push shift unshift splice sort  
+### 修改数组的方法不返回旧数组而返回改动 因此不能链式调用！
 - for...in...不保证顺序   
 ### statements & declaration
 - for(var index in ...) /  for(var value of ...)
