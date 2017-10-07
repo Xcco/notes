@@ -16,7 +16,7 @@ the relative order of elements with the same key value is preserved by the algor
   * SEL - Selection Sort, - O(n^2) - 移动数据较少
   * INS - Insertion Sort, - O(n^2)
   * MER - Merge Sort (recursive implementation), - O(nlgn)
-  * QUI - Quick Sort (recursive implementation), 
+  * QUI - Quick Sort (recursive implementation), - O(nlgn)
   * R-Q - Random Quick Sort (recursive implementation). -O(nlgn)
 * Not Comparison-based Sorting Algorithms:
   * COU - Counting Sort,
@@ -190,7 +190,48 @@ function mergeSort(array) {
   return newArray[0]
 }
 ```
+### 快速排序
+时间 O(nlgn) || O(n^2)
+```
+function quickSort(array) {
+  if (array.length <= 1) {
+    return array
+  }
 
+  function partition(array) {
+    let pivot = 0
+    let low = 0
+    let high = array.length - 1
+    while (low !== high) {
+      if (pivot === low) {
+        if (array[pivot] > array[high]) {
+          swap(array, pivot, high)
+          pivot = high
+        } else {
+          high = high - 1
+        }
+      } else {
+        if (array[pivot] < array[low]) {
+          swap(array, pivot, low)
+          pivot = low
+        } else {
+          low = low + 1
+        }
+      }
+    }
+    return pivot
+  }
+  let pivot = partition(array)
+  let front = quickSort(array.slice(0, pivot))
+  let back = quickSort(array.slice(pivot + 1))
+  front.push(array[pivot])
+  array = front.concat(back)
+  return array
+}
+```
+##### 优化
+随机快速排序
+三数取中(median-of-three):随机选取3个数取中值作为最初的pivot
 
 
 
