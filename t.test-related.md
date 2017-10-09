@@ -30,6 +30,7 @@ reduce(function(pre,cur,i,a){
 ```
 ### string
 
+
 ### 循环
 ```
 for(){
