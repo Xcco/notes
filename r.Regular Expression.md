@@ -4,7 +4,7 @@
 ```
 返回值
 r.test(s)//boolean
-r.exec(s)//string
+r.exec(s)//array
 s.match(r)//array
 s.search(r)//index/-1
 s.replace(r)//string
