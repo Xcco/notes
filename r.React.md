@@ -130,3 +130,41 @@ static propTypes = {
   comment: PropTypes.object.isRequired //this.props.comment必须为object且必须输入
 }
 ```
+# 例子
+```
+function Repeat(props) {
+  let items = [];
+  for (let i = 0; i < props.numTimes; i++) {
+    console.log(props.children);
+    items.push(props.children(i));
+  }
+  return <div>{items}</div>;
+}
+
+function ListOfTenThings() {
+  return (
+    <Repeat numTimes={10}>
+      {(index) => <div key={index}>This is item {index} in the list</div>}
+    </Repeat>
+  );
+}
+
+ReactDOM.render(
+  <ListOfTenThings />,
+  document.getElementById('root')
+);
+
+
+
+
+把{(index) => <div key={index}>This is item {index} in the list</div>}
+看做ƒ (index) {
+      return React.createElement(
+        'div',
+        { key: index },
+        'This is item ',
+        index,
+        ' in the list'
+      );
+    }
+```
