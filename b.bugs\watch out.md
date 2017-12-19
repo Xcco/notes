@@ -7,6 +7,7 @@
 ### typeof 小写
 ### 创建原型时不要忘了 this！
 ### 注意不要发生嵌套错误！
+### RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
 ```
 //wrong
 let vm=new Vue({
@@ -49,4 +50,3 @@ let vm=new Vue({
   }
 })
 ```
-
