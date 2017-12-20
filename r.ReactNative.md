@@ -71,6 +71,61 @@ react中的onChange对应的是rn中的onChangeText
 setNativeProps方法可以使我们直接修改基于原生视图的组件的属性
 ### requestAnimationFrame
 
+# Timer
+### 务必在卸载组件前清除定时器！
+* setTimeout, clearTimeout
+* setInterval, clearInterval
+* setImmediate, clearImmediate
+* requestAnimationFrame, cancelAnimationFrame
+
+requestAnimationFrame(fn)和setTimeout(fn, 0)不同，前者会在每帧刷新之后执行一次，而后者则会尽可能快的执行
+### InteractionManager
+```
+InteractionManager.runAfterInteractions(() => {
+   // ...需要长时间同步执行的任务...
+});
+var handle = InteractionManager.createInteractionHandle();
+// 执行动画... (`runAfterInteractions`中的任务现在开始排队等候)
+// 在动画完成之后
+InteractionManager.clearInteractionHandle(handle);
+// 在所有句柄都清除之后，现在开始依序执行队列中的任务
+```
+# 跨平台(Platform Specific Code)
+### Platform module
+* Platform.OS==='ios'||'android'
+* Platform.select 
+```
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    ...Platform.select({
+      ios: {
+        backgroundColor: 'red',
+      },
+      android: {
+        backgroundColor: 'blue',
+      },
+    }),
+  },
+});
+
+//返回对应组件
+const Component = Platform.select({
+  ios: () => require('ComponentIOS'),
+  android: () => require('ComponentAndroid'),
+})();
+
+<Component />
+```
+* Platform.Version android返回版本数number ios返回版本号string 需要parseInt
+### Platform-specific extensions
+```
+BigButton.ios.js
+BigButton.android.js
+//自动识别环境
+const BigButton = require('./BigButton');
+```
+
 
 
 
