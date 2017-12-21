@@ -39,3 +39,97 @@ inbox.filter((msg) => {
   return false;
 });
 ```
+* Use default parameter syntax and always put default parameters last.
+```
+// good
+function handleThings(name, opts = {}) {
+  // ...
+}
+```
+* Use Object.prototype.hasOwnProperty.call(object, key)
+```javascript
+// bad
+console.log(object.hasOwnProperty(key));
+
+// good
+console.log(Object.prototype.hasOwnProperty.call(object, key));
+
+// best
+const has = Object.prototype.hasOwnProperty; // cache the lookup once, in module scope.
+/* or */
+import has from 'has';
+// ...
+console.log(has.call(object, key));
+```
+* Arrow function 参数单行无括号 折行有 =>不与 > < 混用
+```
+// good
+[1, 2, 3].map(x => x * x);
+// good
+[1, 2, 3].map((x) => {
+  const y = x + 1;
+  return x * y;
+});
+// good
+const itemHeight = item => (item.height > 256 ? item.largeSize : item.smallSize);
+```
+* Methods can return this to help with method chaining.
+```
+// good
+class Jedi {
+  jump() {
+    this.jumping = true;
+    return this;
+  }
+
+  setHeight(height) {
+    this.height = height;
+    return this;
+  }
+}
+```
+* prefer default export over named export
+```
+// bad
+export function foo() {}
+
+// good
+export default function foo() {}
+```
+* Use /** ... */ for multi-line comments.
+```
+// good
+/**
+ * make() returns a new element
+ * based on the passed-in tag name
+ */
+function make(tag) {
+
+  // ...
+
+  return element;
+}
+```
+* Use // FIXME: to annotate problems. use // TODO: to annotate solutions to problems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
