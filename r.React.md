@@ -89,15 +89,18 @@ handleClick(param,e){...}//注意bind后面可以传参，参数传到event前�
  <button onClick={this.handleClick}>
 ```
 # 生命周期
--> constructor()
--> componentWillMount()
--> render()
-// 然后构造 DOM 元素插入页面
--> componentDidMount()
-// ...
-// 即将从页面中删除
--> componentWillUnmount()
-// 从页面中删除"
+-> constructor()  
+-> componentWillMount()  
+-> render()  
+// 然后构造 DOM 元素插入页面  
+-> componentDidMount()  
+// ...  
+// 即将从页面中删除  
+-> componentWillUnmount()  
+// 从页面中删除"  
+
+* componentWillMount()**无用** 此时已经渲染完 setState无效
+* componentWillReceiveProps()第一次render不生效
 
 # ref DOM操作
 ref为私有属性 属性值是一个函数
