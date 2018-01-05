@@ -108,7 +108,9 @@ ref为私有属性 属性值是一个函数
 <input ref={(input) => this.input = input} />
 //this.input即为挂载后的DOM元素
 ```
-* 能不用 ref 就不用
+- Refs 不能连接到一个 stateless function（无状态函数），因为这些组件没有支持实例。
+- 绝不 在任何组件的 render 方法中访问 refs
+
 # props.children
 所有嵌套在组件中的 JSX 结构都可以在组件内部通过 props.children 获取到
 # dangerouslySetInnerHTML
