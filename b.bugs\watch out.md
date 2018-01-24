@@ -2,6 +2,8 @@
 ### 输入react-native run-ios报错：ENOENT no such file or directory, uv_chdir
 * react-native upgrade
 * react-native run-ios
+### flatlist 数据不显示
+添加属性 removeClippedSubviews={false}
 # 判断 === ！== 不是= 小心 if里面的=
 # 图片处理 写在onload后面
 ### focus()在chrome firefox里有时会失效！要加setTimeout
