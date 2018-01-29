@@ -4,6 +4,9 @@
 * react-native run-ios
 ### flatlist 数据不显示
 添加属性 removeClippedSubviews={false}
+### 操作TextInput的value值
+用setNativeProps
+### mobx + defaultValue 有value效果
 # 判断 === ！== 不是= 小心 if里面的=
 # 图片处理 写在onload后面
 ### focus()在chrome firefox里有时会失效！要加setTimeout
