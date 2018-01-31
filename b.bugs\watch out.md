@@ -8,7 +8,8 @@
 用setNativeProps
 ### mobx + defaultValue 有value效果
 
-
+### borderBottomWidth
+旧版 <Text>等组件不支持 神坑！
 
 # 细节错误
 ### 注意命名
