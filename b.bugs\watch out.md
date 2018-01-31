@@ -7,8 +7,13 @@
 ### 操作TextInput的value值
 用setNativeProps
 ### mobx + defaultValue 有value效果
-# 判断 === ！== 不是= 小心 if里面的=
-# 图片处理 写在onload后面
+
+
+
+# 细节错误
+### 注意命名
+### 判断 === ！== 不是= 小心 if里面的=
+### 图片处理 写在onload后面
 ### focus()在chrome firefox里有时会失效！要加setTimeout
 ### node里 #! /usr/bin/env node 是env！！！不是nev！！！
 ### code EINTEGRITY一般是代理问题
