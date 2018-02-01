@@ -7,22 +7,23 @@
 ### 操作TextInput的value值
 用setNativeProps
 ### mobx + defaultValue 有value效果
+### RN动画
+RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
 
 ### borderBottomWidth
 旧版 <Text>等组件不支持 神坑！
 
 # 细节错误
-### 注意命名
-### 判断 === ！== 不是= 小心 if里面的=
-### 图片处理 写在onload后面
-### focus()在chrome firefox里有时会失效！要加setTimeout
-### node里 #! /usr/bin/env node 是env！！！不是nev！！！
-### code EINTEGRITY一般是代理问题
-### getElement除了id没有s其它都有s
-### typeof 小写
-### 创建原型时不要忘了 this！
-### 注意不要发生嵌套错误！
-### RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
+* 三元表达式都会执行 a === undefined ? a : a[0] 仍会报错 要用if...else...
+* 判断 === ！== 不是= 小心 if里面的=
+* 图片处理 写在onload后面
+* focus()在chrome firefox里有时会失效！要加setTimeout
+* node里 #! /usr/bin/env node 是env！！！不是nev！！！
+* code EINTEGRITY一般是代理问题
+* getElement除了id没有s其它都有s
+* typeof 小写
+* 创建原型时不要忘了 this！
+* 注意不要发生嵌套错误！
 ```
 //wrong
 let vm=new Vue({
