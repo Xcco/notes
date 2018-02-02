@@ -22,7 +22,7 @@ for (var value of iterable) {
     console.log(iterable);
 }
 //[11, 21, 31]
-
+```
 ``` 
 reduce(function(pre,cur,i,a){
         return pre + cur;
@@ -43,3 +43,6 @@ for(){
   a!==b || xxxx
 }
 ```
+# HTML & CSS
+### flex
+flex只有父元素控制轴方向 子元素不能控制自身 只有flex-grow和 align-self:stretch
