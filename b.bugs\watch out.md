@@ -12,6 +12,9 @@ RN动画 标签前加Animated. 否则报错attempted to assign to readonly prope
 
 ### borderBottomWidth
 旧版 <Text>等组件不支持 神坑！
+  
+### TouchableNativeFeedback
+<TouchableNativeFeedback> 只能跟一个<View>子组件 且style只能写在<View>内
 
 # 细节错误
 * 三元表达式都会执行 a === undefined ? a : a[0] 仍会报错 要用if...else...
