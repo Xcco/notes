@@ -20,7 +20,7 @@ RN动画 标签前加Animated. 否则报错attempted to assign to readonly prope
 旧版 <Text>等组件不支持 神坑！
   
 ### <Touch...>
-<Touch...>组件内有<Text>且内容不为string（比如number）onPress事件会有一定概率触发onStartShouldSetResponderCapture错误（还是一定概率，真神坑 -_-#）
+<Touch...>组件内有<Text>且内容不为string（比如number）onPress事件会有一定概率触发onStartShouldSetResponderCapture错误（还是一定概率，真神坑 -_-#）解决方式 toString()
 [链接](https://github.com/facebook/react-native/issues/13080)
 
 # 细节错误
