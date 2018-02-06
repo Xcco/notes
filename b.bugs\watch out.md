@@ -10,11 +10,18 @@
 ### RN动画
 RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
 
-### borderBottomWidth
-旧版 <Text>等组件不支持 神坑！
+
   
 ### TouchableNativeFeedback
 <TouchableNativeFeedback> 只能跟一个<View>子组件 且style只能写在<View>内
+  
+## 0.43版本bug
+### borderBottomWidth
+旧版 <Text>等组件不支持 神坑！
+  
+### <Touch...>
+<Touch...>组件内有<Text>且内容不为string（比如number）onPress事件会有一定概率触发onStartShouldSetResponderCapture错误（还是一定概率，真神坑 -_-#）
+[链接](https://github.com/facebook/react-native/issues/13080)
 
 # 细节错误
 * 三元表达式都会执行 a === undefined ? a : a[0] 仍会报错 要用if...else...
