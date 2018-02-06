@@ -2,6 +2,8 @@
 ### 输入react-native run-ios报错：ENOENT no such file or directory, uv_chdir
 * react-native upgrade
 * react-native run-ios
+### 取消 remote debug JS 后反而运行缓慢
+代码中console.log写多了
 ### flatlist 数据不显示
 添加属性 removeClippedSubviews={false}
 ### 操作TextInput的value值
