@@ -24,7 +24,9 @@ RN动画 标签前加Animated. 否则报错attempted to assign to readonly prope
 ### <Touch...>
 <Touch...>组件内有<Text>且内容不为string（比如number）onPress事件会有一定概率触发onStartShouldSetResponderCapture错误（还是一定概率，真神坑 -_-#）解决方式 toString()
 [链接](https://github.com/facebook/react-native/issues/13080)
-
+  
+### 工具
+expo 有时在无wifi情况下不能识别二维码
 # 细节错误
 * 三元表达式都会执行 a === undefined ? a : a[0] 仍会报错 要用if...else...
 * 判断 === ！== 不是= 小心 if里面的=
