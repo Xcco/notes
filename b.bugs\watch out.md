@@ -13,7 +13,13 @@
 * RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
 * RN动画outputRange仅支持字符串 不支持normalizeColor/processColor等转换成的数字
 
-  
+### SegmentControl 采坑之旅
+边框整体包裹radius加tab左边
+尖角冒出，白色缝隙=> tab radius
+rightRadius产生bug 边框无效 => 整体加 正片叠底色加负margin 
+overflow:hidden 无效 => tab radius
+rightRadius产生bug 边框无效 => 第二个左右都有 其它右边
+  
 ### TouchableNativeFeedback
 <TouchableNativeFeedback> 只能跟一个<View>子组件 且style只能写在<View>内
   
