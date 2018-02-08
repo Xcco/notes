@@ -17,6 +17,9 @@
 ### TouchableNativeFeedback
 <TouchableNativeFeedback> 只能跟一个<View>子组件 且style只能写在<View>内
   
+### borderTopRightRadius borderBottomRightRadius
+android上不支持 会产生bug
+  
 ## 0.43版本bug
 ### borderBottomWidth
 旧版 <Text>等组件不支持 神坑！
