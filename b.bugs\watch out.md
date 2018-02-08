@@ -10,8 +10,8 @@
 用setNativeProps
 ### mobx + defaultValue 有value效果
 ### RN动画
-RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
-
+* RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
+* RN动画outputRange仅支持字符串 不支持normalizeColor/processColor等转换成的数字
 
   
 ### TouchableNativeFeedback
