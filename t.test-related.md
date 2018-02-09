@@ -1,3 +1,7 @@
+### 静态方法与实例交换数据
+构造一个emitter 发布订阅模式
+
+
 ### array方法
 - 新数组:concat filter map slice   
 - 旧数组:fill reverse pop push shift unshift splice sort  
