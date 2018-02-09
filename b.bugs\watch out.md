@@ -12,13 +12,6 @@
 ### RN动画
 * RN动画 标签前加Animated. 否则报错attempted to assign to readonly property
 * RN动画outputRange仅支持字符串 不支持normalizeColor/processColor等转换成的数字
-
-### SegmentControl 采坑之旅
-边框整体包裹radius加tab左边
-尖角冒出，白色缝隙=> tab radius
-rightRadius产生bug 边框无效 => 整体加 正片叠底色加负margin 
-overflow:hidden 无效 => tab radius
-rightRadius产生bug 边框无效 => 第二个左右都有 其它右边
   
 ### TouchableNativeFeedback
 <TouchableNativeFeedback> 只能跟一个<View>子组件 且style只能写在<View>内
@@ -33,7 +26,17 @@ android上不支持 会产生bug
 ### <Touch...>
 <Touch...>组件内有<Text>且内容不为string（比如number）onPress事件会有一定概率触发onStartShouldSetResponderCapture错误（还是一定概率，真神坑 -_-#）解决方式 toString()
 [链接](https://github.com/facebook/react-native/issues/13080)
-  
+
+### SegmentControl 采坑之旅
+边框整体包裹radius加tab左边
+尖角冒出，白色缝隙=> tab radius
+rightRadius产生bug 边框无效 => 整体加 正片叠底色加负margin 
+overflow:hidden 无效 => tab radius
+rightRadius产生bug 边框无效 => 第二个左右都有 其它右边
+
+### 静态方法与实例交换数据
+构造一个emitter 发布订阅模式
+
 ### 工具
 expo 有时在无wifi情况下不能识别二维码
 # 细节错误
