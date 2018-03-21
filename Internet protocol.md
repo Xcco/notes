@@ -21,16 +21,70 @@
 方法 URI 协议版本 请求首部字段 内容实体
 ### 响应报文构成
 协议版本 状态码 状态码原因短语 响应首部字段 主体
+### 报文结构
+头部 CR+LF 主体
 ### Method
-GET POST Put(have security problem) DELETE 
+GET POST 
+* Put(have security problem):发送文件
+* DELETE:删除文件
+* HEAD:确认URI有效性 资源更新时间
+* OPTIONS:询问支持方法
+* TRACE:追踪路径
+* CONNECT:隧道协议连接代理
+### 状态码
+##### 1XX 正在处理
+##### 2XX 成功
+* 200 OK
+* 204 No Content 无返回资源
+* 206 Partial Content 部分资源
+##### 3XX 重定向
+* 301 Moved permanently 永久重定向
+* 302 Found 临时重定向
+* 303 See Other 存在另一个URI
+* 304 Not Modified 找到资源 资源未改变 不符合请求条件 （可直接使用缓存）
+##### 4XX 客户端错误
+* 400 Bad Request
+* 401 Unauthorized 
+* 403 Forbidden
+* 404 Not Found
+##### 5XX 服务器错误
+* 500 Internal Server Error
+* 503 Service Unavailable
+
+
 ##### GET POST区别
-* GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。 
 * GET产生一个TCP数据包；POST产生两个TCP数据包。
 对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
 而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
+* GET在浏览器回退时是无害的，而POST会再次提交请求。
+* GET产生的URL地址可以被Bookmark，而POST不可以。
+* GET请求会被浏览器主动cache，而POST不会，除非手动设置。
+* GET请求只能进行url编码，而POST支持多种编码方式。
+* GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
+* GET请求在URL中传送的参数是有长度限制的，而POST么有。
+* 对参数的数据类型，GET只接受ASCII字符，而POST没有限制。
+* GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。
+* GET参数通过URL传递，POST放在Request body中。
 
-
-
-
-# 其它
+##### 其它
 * URL 表明位置的标识符 是URI子集
+
+# Web服务器
+### 代理
+具有转发功能的应用程序
+* 使用缓存技术减少流量
+* 特定网站访问控制
+### 网关
+转发其他服务器通信数据的服务器
+* 能提供非HTTP协议服务 提高安全性
+### 隧道
+特点是有两个IP头
+* 使用加密手段通信 提高安全性
+
+
+
+
+
+
+
+
