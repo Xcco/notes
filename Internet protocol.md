@@ -81,6 +81,12 @@ GET POST
 特点是有两个IP头
 * 使用加密手段通信 提高安全性
 
+# HTTPS
+HTTP Secure =HTTP + SSL(Secure Socket Layer)
+### HTTP缺点
+* 通信明文
+* 不验证身份 Dos攻击
+* 无法证明完整性 中间人攻击(Man-in-the-Middle attack)
 
 
 
