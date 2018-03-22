@@ -1,5 +1,12 @@
+
+
 # 知识点
 * iOS会阻止所有非https的请求
+
+# ReactNative 优势
+* RN 是js组件化 没有其他语言混合
+* RN 的技术框架方便调用其它平台api
+* 能够渲染原生视图
 
 # style
 ### flexbox布局
