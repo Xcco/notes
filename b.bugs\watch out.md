@@ -1,4 +1,6 @@
 # React Native
+### react.children.only expected to receive a single react element child
+TabBarIOS.Item 必须有且只有一个子组件 
 ### 输入react-native run-ios报错：ENOENT no such file or directory, uv_chdir
 * react-native upgrade
 * react-native run-ios
