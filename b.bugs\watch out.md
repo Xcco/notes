@@ -8,6 +8,8 @@ TabBarIOS.Item 必须有且只有一个子组件
 代码中console.log写多了
 ### flatlist 数据不显示
 添加属性 removeClippedSubviews={false}
+### flatlist 顶部留白
+添加属性 automaticallyAdjustContentInsets={false}
 ### 操作TextInput的value值
 用setNativeProps
 ### mobx + defaultValue 有value效果
