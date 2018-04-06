@@ -8,11 +8,20 @@
 * RN 的技术框架方便调用其它平台api
 * 能够渲染原生视图
 
+# 引入字体
+第一种：Expo.Font.loadAsync() 异步加载 还需要setState判断 否则会报错
+第二种：
+# 屏幕尺寸
+```
+import Dimensions from 'Dimensions';
+Dimensions.get('window').scale//分辨率
+```
 # style
 ### flexbox布局
 默认
 
 特有：
+布局可以看做web顺时针旋转90度
 flex:1 自动扩张 ===flexGrow:1
 
 # 组件
