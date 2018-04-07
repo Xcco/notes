@@ -9,3 +9,26 @@
 ```
  #! /usr/bin/env node
 ```
+2.赋予文件执行权限
+```
+chmod +x /home/user/bin/node-echo.js
+```
+3.在PATH环境变量中指定的某个目录下，例如在/usr/local/bin下边创建一个软链文件
+```
+sudo ln -s /home/user/bin/node-echo.js /usr/local/bin/node-echo
+```
+### 工程目录
+```
+- /home/user/workspace/node-echo/   # 工程目录
+    - bin/                          # 存放命令行相关代码
+        node-echo
+    + doc/                          # 存放文档
+    - lib/                          # 存放API相关代码
+        echo.js
+    - node_modules/                 # 存放三方包
+        + argv/
+    + tests/                        # 存放测试用例
+    package.json                    # 元数据文件
+    README.md                       # 说明文件
+ ```
+ 
