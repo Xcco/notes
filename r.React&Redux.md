@@ -47,6 +47,11 @@ combineReducers（）用于合成一个大的 Reducer
 - componentWillReceiveProps(nextProps)
   - 父组件render即触发 setState不触发
 - shouldComponentUpdate
+  - 和render是唯二要求返回结果的函数
 - componentWillUpdate
 - render
 - componentDidUpdate
+# 优化
+- shouldComponentUpdate
+- React.PureComponent
+  - 自动浅比较state 判断是否更新
