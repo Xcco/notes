@@ -24,6 +24,20 @@
 8. render() 方法。
 
 
+# React 源码
+### render
+render方法实际上是调用了React.createElement方法返回一个ReactElement方法生成的对象  
+如果我们通过class关键字声明React组件,那么他们在解析成真实DOM之前一直是ReactElement类型的js对象。
+### children
+父子嵌套关系由props提供 
+props.children = children || childrenArray
+### 挂载
+调用_renderSubtreeIntoContainer函数
+挂载本质就是利用innerHTML属性
+1. 根据ReactDOM.render()传入不同的参数，React内部会创建四大类封装组件，记为componentInstance。（为组件加上mountComponet方法）
+2. 而后将其作为参数传入mountComponentIntoNode方法中，由此获得组件对应的HTML（该过程调用mountComponet方法 并触发组件生命周期），记为变量markup。
+3. 将真实的DOM的属性innerHTML设置为markup，即完成了DOM插入。
+
 # 组件
 定义组件
 ```
