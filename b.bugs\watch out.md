@@ -22,6 +22,8 @@ TabBarIOS.Item 必须有且只有一个子组件
   
 ### borderTopRightRadius borderBottomRightRadius
 android上不支持 会产生bug
+### setState()
+setState()是异步 用回调或者componentDidMount()
   
 ## 0.43版本bug
 ### borderBottomWidth
