@@ -1,3 +1,5 @@
+# 项目细节
+### 注意导航栏遮挡flatlist底部 要有一定的留白
 # React Native
 ### react.children.only expected to receive a single react element child
 TabBarIOS.Item 必须有且只有一个子组件 
