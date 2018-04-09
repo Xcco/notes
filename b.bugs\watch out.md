@@ -1,6 +1,8 @@
 # 项目细节
 ### 注意导航栏遮挡flatlist底部 要有一定的留白
 # React Native
+### 卡在'Loading dependency graph, done.'
+关了vpn
 ### react.children.only expected to receive a single react element child
 TabBarIOS.Item 必须有且只有一个子组件 
 ### 输入react-native run-ios报错：ENOENT no such file or directory, uv_chdir
