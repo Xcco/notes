@@ -1,4 +1,11 @@
 **停止使用arguments(不定参数和默认参数完美代替) var**
+# super
+* 对象中指代当前对象的原型对象（__proto__）或者说setPrototypeOf的值
+* 类中super作为函数调用时，代表父类的构造函数。但指向当前函数super()===Parent.prototype.constructor.call(this)
+* 类中super作为对象时，在普通方法中，代表父类的原型对象 但指向子类；super.print()=Parent.prototype.print.call(this)   
+  由于this指向子类实例，所以如果通过super对某个属性赋值，这时super就是this，赋值的属性会变成子类实例的属性。
+* 在静态方法中，代表父类。static...super(这里就是指Parent)
+* 使用super的时候，必须显式指定是作为函数、还是作为对象使用，否则会报错。即super()/super.
 # let&const
 ### let
 用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。**let实际上为 JavaScript 新增了块级作用域。**
