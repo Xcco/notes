@@ -2,7 +2,10 @@
 ### 如果找不出问题在哪 务必看看有没有拼错/大小写错误等
 # 项目细节
 ### 注意导航栏遮挡flatlist底部 要有一定的留白
+### <Image/>require静态字符串 不能使用动态（预加载会读取宽高 防止抖动）
+defaultSource={uri: string, width: number, height: number, scale: number}
 # React Native
+
 ### 卡在'Loading dependency graph, done.'
 关了vpn
 ### react.children.only expected to receive a single react element child
