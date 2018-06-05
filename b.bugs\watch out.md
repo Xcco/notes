@@ -2,6 +2,18 @@
 ### 如果找不出问题在哪 务必看看有没有拼错/大小写错误等
 # css
 height: calc(100% - 100px);减号两边必须有空格
+# TypeScript
+类中的绑定写法不能和async合用
+```
+class Foo extends Component {
+  handleClick() {
+    console.log('Click happened');
+  }
+  async render = () => { //此处会报错
+    ...
+  }
+}
+```
 # 项目细节
 ### 注意导航栏遮挡flatlist底部 要有一定的留白
 ### <Image/>require静态字符串 不能使用动态（预加载会读取宽高 防止抖动）
