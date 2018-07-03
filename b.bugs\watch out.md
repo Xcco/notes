@@ -1,7 +1,8 @@
 # 血泪教训
 ### 如果找不出问题在哪 务必看看有没有拼错/大小写错误等
 # css
-height: calc(100% - 100px);减号两边必须有空格
+* height: calc(100% - 100px);减号两边必须有空格
+* box-sizing 对 inline元素无效
 # TypeScript
 类中的绑定写法不能和async合用
 ```
