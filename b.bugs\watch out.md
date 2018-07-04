@@ -3,6 +3,12 @@
 # css
 * height: calc(100% - 100px);减号两边必须有空格
 * box-sizing 对 inline元素无效
+
+# 工作相关
+### tslint不起作用
+--> 未找到tslint相关库 --> 未安装两个custom-app下的node_modules 
+diy-app执行下linkmodules.bat
+
 # TypeScript
 类中的绑定写法不能和async合用
 ```
