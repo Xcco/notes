@@ -10,7 +10,7 @@
 diy-app执行下linkmodules.bat
 
 # TypeScript
-类中的绑定写法不能和async合用
+### 类中的绑定写法不能和async合用
 ```
 class Foo extends Component {
   handleClick() {
@@ -21,6 +21,10 @@ class Foo extends Component {
   }
 }
 ```
+### Exported variable 'variable name' has or is using private name 'private name'
+可能需要export  
+https://github.com/Microsoft/TypeScript/issues/6307
+
 # 项目细节
 ### 注意导航栏遮挡flatlist底部 要有一定的留白
 ### <Image/>require静态字符串 不能使用动态（预加载会读取宽高 防止抖动）
