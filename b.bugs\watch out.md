@@ -5,6 +5,8 @@
 * box-sizing 对 inline元素无效
 
 # 工作相关
+### 文件未被打包
+webpack按需引用 所以文件一定要被其他文件引用才会引入
 ### tslint不起作用
 --> 未找到tslint相关库 --> 未安装两个custom-app下的node_modules 
 diy-app执行下linkmodules.bat
