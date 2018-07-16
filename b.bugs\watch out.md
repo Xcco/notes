@@ -3,6 +3,7 @@
 # css
 * height: calc(100% - 100px);减号两边必须有空格
 * box-sizing 对 inline元素无效
+* overflow: auto 中滑动栏也实际占据10px宽度，但在devtool中不显示
 
 # 工作相关
 ### 文件未被打包
