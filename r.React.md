@@ -118,6 +118,9 @@ handleClick(param,e){...}//注意bind后面可以传参，参数传到event前�
 
 # ref DOM操作
 ref为私有属性 属性值是一个函数
+* 下面的inline function写法会创建两次ref 正确的写法是用callback function
+  https://stackoverflow.com/questions/33796267/how-to-use-refs-in-react-with-typescript
+  https://reactjs.org/docs/refs-and-the-dom.html#caveats-with-callback-refs
 ```
 <input ref={(input) => this.input = input} />
 //this.input即为挂载后的DOM元素
