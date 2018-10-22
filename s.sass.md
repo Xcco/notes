@@ -8,6 +8,9 @@ sass --watch test.scss:test.css --style expanded
 - !default默认值
 - ！global全局变量
 
+#
+sass 下划线（_）打头文件会默认为@import引入文件，不会编译成css
+
 # 嵌套（避免嵌套过多）
 ### 选择器嵌套
 ```
