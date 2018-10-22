@@ -1,0 +1,10 @@
+### H5
+##### 编译问题
+* submodule忘更新
+* 更新忘了重新yarn
+### Flash
+##### 编译问题
+* 3个maven包install/compile
+* 项目环境：window.basePath
+* 方案id：appConfig.designConfig
+* nginx配置
