@@ -6,4 +6,4 @@
 * 高阶函数:接受并返回一个函数的函数称为高阶函数
 * 柯里化(Currying):给定一个函数的部分参数，生成一个接受其他参数的新函数
 * 组合(Composing):将多个函数的能力合并，创造一个新的函数
-[参考文章]{http://taobaofed.org/blog/2017/03/16/javascript-functional-programing/}
+[参考文章](http://taobaofed.org/blog/2017/03/16/javascript-functional-programing/)
